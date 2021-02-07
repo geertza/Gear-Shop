@@ -1,6 +1,12 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
+// let URL;
+// if (process.env.NODE_ENV === 'production') {
+//   URL = 'https://gatbsy-ecommerce-demo.netlify.com';
+// } else {
+//   URL = 'http://localhost:8000';
+// }
 
 module.exports = {
   siteMetadata: {
@@ -9,6 +15,15 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-snipcart',
+      options: {
+        apiKey: process.env.SNIPCART_API,
+        autopop: true,
+        js: 'https://cdn.snipcart.com/themes/v3.0.0/default/snipcart.js',
+        styles: 'https://cdn.snipcart.com/themes/v3.0.0/default/snipcart.css',
+      },
+ },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

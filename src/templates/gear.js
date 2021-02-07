@@ -13,7 +13,7 @@ export const query = graphql`
       id
       productSlug
       productName
-      detailedDiscription {
+      lgDisc {
         raw
       }
 
@@ -41,10 +41,22 @@ const GearTemplate = ({ data: { item } }) => {
   return (
     <Layout>
         hello)
-      <h2>{console.log('item=',JSON.parse(item.detailedDiscription.raw))}</h2>
+      <h2>{console.log('item=',JSON.parse(item.lgDisc.raw))}</h2>
       <StyledImage fluid={item.image.fluid} />
       {/* render the rich text format description */}
-      <main>{documentToReactComponents(JSON.parse(item.detailedDiscription.raw))}</main>
+      <main>{documentToReactComponents(JSON.parse(item.lgDisc.raw))}</main>
+      <button
+        className={`snipcart-add-item`}
+        data-item-id={item.id}
+        data-item-name={item.productName}
+        data-item-image={item.image.fluid.src}
+        data-item-price={item.price}
+        // data-item-price={item.discountPrice ? item.discountPrice : item.price}
+        data-item-url={item.productSlug}
+      >
+        Add to Cart
+    </button>
+
     </Layout>
   );
 };
